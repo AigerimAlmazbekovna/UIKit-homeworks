@@ -39,10 +39,7 @@ final class ProfileViewController: UIViewController {
                 self.profileHeaderView.topAnchor.constraint(equalTo: self.view.topAnchor)
             ])
         }
-    override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(animated)
-      self.profileHeaderView.setupView()
-    }
+   
     
 }
     
