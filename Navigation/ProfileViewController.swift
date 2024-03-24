@@ -28,7 +28,7 @@ final class ProfileViewController: UIViewController {
             
         }
     private func drawSelf() {
-            self.view.backgroundColor = .white
+        self.view.backgroundColor = .orange
             
             self.view.addSubview(self.profileHeaderView)
             
@@ -36,7 +36,7 @@ final class ProfileViewController: UIViewController {
                 self.profileHeaderView.topAnchor.constraint(equalTo: self.view.topAnchor),
                 self.profileHeaderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
                 self.profileHeaderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-                self.profileHeaderView.topAnchor.constraint(equalTo: self.view.topAnchor)
+                self.profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
             ])
         }
    
