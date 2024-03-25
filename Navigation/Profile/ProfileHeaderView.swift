@@ -64,6 +64,7 @@ class ProfileHeaderView: UIView {
         button.addTarget(self, action: #selector(statusButtonPressed), for: .touchUpInside)
         return button
     }()
+
     
     private var statusText = "status"
     
@@ -93,17 +94,13 @@ class ProfileHeaderView: UIView {
     }
     
     @objc private func statusButtonPressed() {
-        if statusTextField.text == ""{
-            print(statusTextField.text!)
-        }else{
-            print("statusTexfield is empty")
+            print(statusTextField.text ?? "No text")
         }
         
-    }
+
     
     
     private func  setupContraints() {
-        
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -122,9 +119,11 @@ class ProfileHeaderView: UIView {
             
             showStatusButton.topAnchor.constraint( equalTo: statusTextField.bottomAnchor, constant: 50),
             showStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            showStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            showStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            showStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
             
         ])
+        
     }
     
     
