@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-
+    
     private lazy var fullnameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
@@ -28,7 +28,7 @@ class ProfileHeaderView: UIView {
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.clipsToBounds = true
-    
+        
         return imageView
     }()
     private lazy var statusTextField: UITextField = {
@@ -43,7 +43,8 @@ class ProfileHeaderView: UIView {
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.gray.cgColor
         textField.text = textInputContextIdentifier
-              
+        textField.placeholder = "Введите статус"
+        
         return textField
     }()
     
@@ -64,32 +65,42 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    private var statusText = "status text"
+    private var statusText = "status"
+    
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-       addSubview(fullnameLabel)
-       addSubview(avatarImageView)
-       addSubview(statusTextField)
-       addSubview(showStatusButton)
+        addSubview(fullnameLabel)
+        addSubview(avatarImageView)
+        addSubview(statusTextField)
+        addSubview(showStatusButton)
         
         setupContraints()
-        statusButtonPressed()
         statusTextField.delegate = self
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    @objc private func statusTextChanged(_ textField: UITextField) {
-            statusText = textField.text ?? ""
-        }
-    @objc private func statusButtonPressed() {
-        statusTextField.text = statusText
         
-       }
-       
+        
+        
+    }
+    
+    @objc private func statusTextChanged(_ textField: UITextField) {
+        statusText = textField.text ?? ""
+    }
+    
+    @objc private func statusButtonPressed() {
+        if statusTextField.text == ""{
+            print(statusTextField.text!)
+        }else{
+            print("statusTexfield is empty")
+        }
+        
+    }
+    
     
     private func  setupContraints() {
         
@@ -107,16 +118,16 @@ class ProfileHeaderView: UIView {
             statusTextField.topAnchor.constraint(equalTo: fullnameLabel.bottomAnchor, constant: 20),
             statusTextField.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
             statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-               statusTextField.heightAnchor.constraint(equalToConstant: 32),
+            statusTextField.heightAnchor.constraint(equalToConstant: 32),
             
             showStatusButton.topAnchor.constraint( equalTo: statusTextField.bottomAnchor, constant: 50),
             showStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
             showStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16)
-        
+            
         ])
     }
     
-
+    
 }
 extension ProfileHeaderView: UITextFieldDelegate {
     

@@ -11,10 +11,10 @@ import UIKit
 final class ProfileViewController: UIViewController {
     
     private lazy var profileHeaderView: ProfileHeaderView = {
-            let profileHeaderView = ProfileHeaderView()
-            profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
-            return profileHeaderView
-        }()
+        let profileHeaderView = ProfileHeaderView()
+        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        return profileHeaderView
+    }()
     
     
     
@@ -25,24 +25,25 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         self.drawSelf()
-            
-        }
+        
+    }
     private func drawSelf() {
-        self.view.backgroundColor = .orange
-            
-            self.view.addSubview(self.profileHeaderView)
-            
-            NSLayoutConstraint.activate([
-                self.profileHeaderView.topAnchor.constraint(equalTo: self.view.topAnchor),
-                self.profileHeaderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                self.profileHeaderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-                self.profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
-            ])
-        }
-   
+        self.view.backgroundColor = .gray
+        
+        self.view.addSubview(self.profileHeaderView)
+        
+        NSLayoutConstraint.activate([
+            self.profileHeaderView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.profileHeaderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            self.profileHeaderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            self.profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
+        ])
+    }
+    
+    
     
 }
-    
-    
+
+
 
     
