@@ -24,7 +24,7 @@ class ProfileHeaderView: UIView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "cat")
-        imageView.layer.cornerRadius = 64
+        imageView.layer.cornerRadius = 50
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.clipsToBounds = true
@@ -41,10 +41,10 @@ class ProfileHeaderView: UIView {
         textField.leftViewMode = .always
         textField.layer.cornerRadius = 8
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.white.cgColor
-        textField.backgroundColor = .white
+        textField.layer.borderColor = UIColor.gray.cgColor
         textField.text = textInputContextIdentifier
         textField.placeholder = "Введите статус"
+        textField.backgroundColor = .white
         
         return textField
     }()
@@ -55,7 +55,7 @@ class ProfileHeaderView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .systemBlue
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 20
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowRadius = 4
@@ -65,19 +65,45 @@ class ProfileHeaderView: UIView {
         button.addTarget(self, action: #selector(statusButtonPressed), for: .touchUpInside)
         return button
     }()
-
-    
+    private var statusLabel: UILabel {
+        let labelTwo = UILabel()
+        labelTwo.numberOfLines = 1
+        labelTwo.text = "StatusLabel"
+        labelTwo.textColor = .black
+        labelTwo.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        labelTwo.translatesAutoresizingMaskIntoConstraints = false
+        return labelTwo
+        
+    }
     private var statusText = "status"
     
-    
+    private lazy var stackView: UIStackView = { [unowned self] in
+           let stackView = UIStackView()
+           
+           stackView.translatesAutoresizingMaskIntoConstraints = false
+           stackView.clipsToBounds = true
+           
+        stackView.axis = .vertical
+           stackView.distribution = .fillEqually
+           stackView.alignment = .fill
+           stackView.spacing = 0.0
+               
+           stackView.addArrangedSubview(self.fullnameLabel)
+           stackView.addArrangedSubview(self.statusLabel)
+           stackView.addArrangedSubview(self.statusTextField)
+           
+           return stackView
+       }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(fullnameLabel)
+    
         addSubview(avatarImageView)
-        addSubview(statusTextField)
+    
         addSubview(showStatusButton)
+        addSubview(stackView)
+        
         
         setupContraints()
         statusTextField.delegate = self
@@ -95,36 +121,34 @@ class ProfileHeaderView: UIView {
     }
     
     @objc private func statusButtonPressed() {
-            print(statusTextField.text ?? "No text")
+        if statusTextField.text == ""{
+            print(statusTextField.text!)
+        }else{
+            print("statusTexfield is empty")
         }
         
-
+    }
     
     
     private func  setupContraints() {
+        
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 128),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 120),
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
             
-            fullnameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            fullnameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 156),
-            fullnameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            fullnameLabel.heightAnchor.constraint(equalToConstant: 28),
+            stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            stackView.leadingAnchor.constraint(equalTo:avatarImageView.trailingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            stackView.heightAnchor.constraint(equalToConstant: 120),
+        
             
-            statusTextField.topAnchor.constraint(equalTo: fullnameLabel.bottomAnchor, constant: 20),
-            statusTextField.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            statusTextField.heightAnchor.constraint(equalToConstant: 32),
-            
-            showStatusButton.topAnchor.constraint( equalTo: statusTextField.bottomAnchor, constant: 50),
+            showStatusButton.topAnchor.constraint( equalTo: stackView.bottomAnchor, constant: 42),
             showStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            showStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            showStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            showStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16)
             
         ])
-        
     }
     
     
