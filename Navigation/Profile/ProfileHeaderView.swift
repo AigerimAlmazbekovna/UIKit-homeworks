@@ -24,7 +24,7 @@ class ProfileHeaderView: UIView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "cat")
-        imageView.layer.cornerRadius = 50
+        imageView.layer.cornerRadius = 60
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.clipsToBounds = true
